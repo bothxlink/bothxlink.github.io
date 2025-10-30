@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Both X Link || Videy.co</title>
+  <style>
+    :root {
+      --bg-color: #000000;
+      --card-bg-color: #ffffff;
+      --text-color: #E50914;
+      --link-color: #E50914;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      font-family: Arial, sans-serif;
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: rgba(0,0,0,0.9);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--link-color);
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      margin: 1rem;
+      color: #fff;
+    }
+
+    .gallery-wrapper {
+      position: relative;
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+
+    .gallery-container {
+      display: flex;
+      gap: 1rem;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      padding: 1rem;
+    }
+
+    figure {
+      background-color: var(--card-bg-color);
+      border-radius: 12px;
+      padding: 1rem;
+      min-width: 220px;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
+    }
+
+    figure:hover {
+      transform: translateY(-5px) scale(1.05);
+    }
+
+    figure img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    figure img:hover {
+      transform: scale(1.08);
+    }
+
+    figcaption {
+      text-align: center;
+      color: #000;
+      font-weight: 600;
+      margin: 0.5rem 0;
+    }
+
+    .video-link {
+      padding: 0.5rem 1rem;
+      background: linear-gradient(135deg, #e50914, #ff4d4d);
+      color: #fff;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* Dots wrapper */
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .dot {
+      width: 40px;
+      height: 4px;
+      background: #333;
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .dot .progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: var(--link-color);
+      transition: width linear;
+    }
+
+    /* Nav buttons */
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.6);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background 0.3s;
+      z-index: 5;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .nav-btn.left { left: 10px; }
+    .nav-btn.right { right: 10px; }
+
+    /* Tombol NEXT */
+.next-page-button {
+  display: inline-block;
+  margin: 2rem auto;
+  padding: 0.8rem 2rem;
+  background: linear-gradient(135deg, #e50914, #ff4d4d);
+  color: #fff;
+  border-radius: 40px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.next-page-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+/* Footer */
+footer {
+  margin-top: 3rem;
+  background: #111;
+  color: #aaa;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+}
+        /* Scroll reveal */
+  .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+}
+
+  .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+}
+    /* Default: Desktop */
+.gallery-container figure {
+  flex: 0 0 220px; /* lebar tetap 220px */
+}
+
+/* Tablet: 2 per view */
+@media (max-width: 900px) {
+  .gallery-container figure {
+    flex: 0 0 45%; /* 2 card per baris */
+  }
+}
+
+/* Mobile: 1 per view */
+@media (max-width: 600px) {
+  .gallery-container figure {
+    flex: 0 0 90%; /* 1 card hampir full width */
+  }
+}
+    
+    .gallery-container {
+  scroll-snap-type: x mandatory;
+}
+
+.gallery-container figure {
+  scroll-snap-align: start;
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Gallery 1 -->
+  <div style="text-align:center;">
+  <h2>Most Watched</h2>
+	  
+
+  <div class="gallery-wrapper">
+    <button class="nav-btn left" onclick="scrollGallery('gallery1', -1)">&#10094;</button>
+    <div class="gallery-container" id="gallery1">
+            <figure itemscope itemtype="http://schema.org/VideoObject"> <img src="https://cdn.aceimg.com/15b9b395e.png" alt="Shawty was forced to follow her friend's invitation" itemprop="thumbnailUrl" loading="lazy" width="280" height="180" />
+                <figcaption itemprop="name">Shawty was forced to follow her friend's invitation</figcaption>
+                <meta itemprop="description" content="Shawty was forced to follow her friend's invitation." />
+                <meta itemprop="uploadDate" content="2025-08-27" />
+                <link itemprop="contentUrl" href="https://bothxlink.github.io/lXNbmr161.mp4/" /> <a href="https://bothxlink.github.io/lXNbmr161.mp4/" class="video-link" aria-label="Watch video: Shawty was forced to follow her friend's">Play</a>
+            </figure>
+            <figure itemscope itemtype="http://schema.org/VideoObject"> <img src="https://cdn.aceimg.com/bc76729ac.png" alt="Shawty is so happy her boyfriend came at home😊😊" itemprop="thumbnailUrl" loading="lazy" width="280" height="180" />
+                <figcaption itemprop="name">Shawty is so happy her boyfriend came at home😊😊</figcaption>
+                <meta itemprop="description" content="Shawty is so happy her boyfriend came at home😊😊." />
+                <meta itemprop="uploadDate" content="2025-08-27" />
+                <link itemprop="contentUrl" href="https://bothxlink.github.io/cAPoAy181.mp4/" /> <a href="https://bothxlink.github.io/cAPoAy181.mp4/" class="video-link" aria-label="Watch video: Shawty is so happy her boyfriend came at home😊😊">Play</a>
+            </figure>
+       </div>
+    <button class="nav-btn right" onclick="scrollGallery('gallery1', 1)">&#10095;</button>
+    <div class="dots" id="dots1"></div>
+
+     <script async="async" data-cfasync="false" src="//alightmiraculous.com/9ab65cdf712b8359946c0f766fe240ff/invoke.js"></script>
+<div id="container-9ab65cdf712b8359946c0f766fe240ff"></div>
+
+            </div>
+            <div class="dots" id="dots2"></div>
+    <button class="nav-btn right" onclick="scrollGallery('gallery2', 1)">&#10095;</button>
+
+<footer>
+  <p>&copy; 2025 Videy.co. All rights reserved.</p>
+</footer>
+</div>
+ <script>
+    function setupProgressDots(galleryId, dotsId, interval = 5000) {
+      const gallery = document.getElementById(galleryId);
+      const figures = gallery.querySelectorAll("figure");
+      const dotsContainer = document.getElementById(dotsId);
+
+      let currentIndex = 0;
+      let timer;
+
+      // buat dot sesuai jumlah slide
+      figures.forEach((_, i) => {
+        const dot = document.createElement("div");
+        dot.classList.add("dot");
+        const progress = document.createElement("div");
+        progress.classList.add("progress");
+        dot.appendChild(progress);
+
+        dot.addEventListener("click", () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      });
+
+      const dots = dotsContainer.querySelectorAll(".dot .progress");
+
+      function goToSlide(index) {
+        currentIndex = index;
+        gallery.scrollTo({ left: figures[index].offsetLeft, behavior: "smooth" });
+        resetProgress();
+        restartTimer();
+      }
+
+      function resetProgress() {
+        dots.forEach(p => {
+          p.style.transition = "none";
+          p.style.width = "0%";
+        });
+        void dots[currentIndex].offsetWidth; // force reflow
+        dots[currentIndex].style.transition = `width ${interval}ms linear`;
+        dots[currentIndex].style.width = "100%";
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % figures.length;
+        gallery.scrollTo({ left: figures[currentIndex].offsetLeft, behavior: "smooth" });
+        resetProgress();
+      }
+
+      function restartTimer() {
+        clearInterval(timer);
+        timer = setInterval(nextSlide, interval);
+      }
+
+      function startAutoPlay() {
+        resetProgress();
+        timer = setInterval(nextSlide, interval);
+      }
+
+      startAutoPlay();
+    }
+
+    // tombol panah manual scroll
+    function scrollGallery(galleryId, direction) {
+      const gallery = document.getElementById(galleryId);
+      const scrollAmount = 250;
+      gallery.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+
+    setupProgressDots("gallery1", "dots1");
+    setupProgressDots("gallery2", "dots2");
+       
+     // Scroll reveal
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("active");
+      });
+    }, { threshold: 0.2 });
+    reveals.forEach(el => observer.observe(el));
+
+    // 🚫 Proteksi klik kanan & shortcut inspect
+    document.addEventListener("contextmenu", e => e.preventDefault());
+    document.addEventListener("keydown", e => {
+      if (e.key === "F12") e.preventDefault();
+      if (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key.toUpperCase())) e.preventDefault();
+      if (e.ctrlKey && ["U","S"].includes(e.key.toUpperCase())) e.preventDefault();
+    }); 
+    </script>
+<script async src="https://otices.com/p/waWQiOjEwMzkzNTQsInNpZCI6MTU1OTc0Nywid2lkIjo3MjU3NzAsInNyYyI6Mn0=eyJ.js"></script>	  
+</body>
+</html>
